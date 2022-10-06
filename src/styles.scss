@@ -1,8 +1,8 @@
-@import "~@angular/material/theming";
+@use '@angular/material' as mat;
 
-@include mat-core();
+@include mat.core();
 
-$md-mcypalette: (
+$my-color: (
   50: #e5f0f7,
   100: #bfd9ea,
   200: #94c0dc,
@@ -31,38 +31,22 @@ $md-mcypalette: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000,
+  ),
 );
 
-$mytheme-primary: mat-palette($md-mcypalette);
-$mytheme-accent: mat-palette($mat-purple);
-$mytheme-warn: mat-palette($mat-red);
+$primary: mat.define-palette($my-color);
+$accent: mat.define-palette(mat.$deep-purple-palette);
+$warn: mat.define-palette(mat.$light-green-palette);
 
-$mytheme-theme: mat-light-theme(
+$light: mat.define-light-theme(
   (
     color: (
-      primary: $mytheme-primary,
-      accent: $mytheme-accent,
-      warn: $mytheme-warn
-    )
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
   )
 );
 
-@include angular-material-theme($mytheme-theme);
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.container {
-  max-width: 1200px;
-  display: block;
-  margin: auto;
-  padding: 20px;
-}
+@include mat.all-component-themes($light);
